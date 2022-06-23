@@ -1,5 +1,5 @@
-const { AuthentcationError } = require('apollo-server-express');
-const { Book, User } = require('../models');
+const { AuthenticationError } = require('apollo-server-express')
+const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -12,13 +12,13 @@ const resolvers = {
         me: async (parent, args, context) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
-                .select('-_v -password')
+                .select('-__v -password')
                 .populate('savedBooks');
 
                 return userData;
             };
 
-            throw new AuthentcationError('Not logged in');
+            throw new AuthenticationError('Not logged in');
         }
     },
 
@@ -33,13 +33,13 @@ const resolvers = {
             const user = await User.findOne({ email });
 
             if (!user) {
-                throw new AuthentcationError('Incorrect login')
+                throw new AuthenticationError('Incorrect login')
             };
 
             const correctPw = await user.isCorrectPassword(password);
 
             if (!correctPw) {
-                throw new AuthentcationError('Incorrect login')
+                throw new AuthenticationError('Incorrect login')
             };
 
             const token = signToken(user);
@@ -53,13 +53,13 @@ const resolvers = {
                     { $addToSet: { savedBooks: input } },
                     { new: true } 
                 )
-                .select('-_v -password')
+                .select('-__v -password')
                 .populate('savedBooks');
 
                 return updatedUser;
             }
 
-            throw new AuthentcationError('You must be logged in');
+            throw new AuthenticationError('You must be logged in');
         },
 
         removeBook: async (parent, args, context) => {
@@ -74,7 +74,7 @@ const resolvers = {
                 return updatedUser;
             }
 
-            throw new AuthentcationError('You must be logged in');
+            throw new AuthenticationError('You must be logged in');
         }
     }
 };

@@ -8,13 +8,13 @@ import { REMOVE_BOOK } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 import { useQuery, useMutation } from '@apollo/client';
 
-const SavedBooks = () => {
+const SavedBooks = (props) => {
 
   const [removeBook] = useMutation(REMOVE_BOOK);
+  
   const { loading, data, refetch } = useQuery(GET_ME);
   if (loading) {
-    return 
-      <h2>Loading... </h2>
+    return <h2>Loading... </h2>
   }
 
   const userData = data?.me || {};
