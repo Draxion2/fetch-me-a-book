@@ -8,7 +8,7 @@ import { REMOVE_BOOK } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 import { useQuery, useMutation } from '@apollo/client';
 
-const SavedBooks = (props) => {
+const SavedBooks = () => {
 
   const [removeBook] = useMutation(REMOVE_BOOK);
   

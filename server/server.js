@@ -1,7 +1,6 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
-const express = require('express');
 
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleWare } = require('./utils/auth');
@@ -41,4 +40,4 @@ const startApolloServer = async (typeDefs, resolvers) => {
 };
 
 // call the sync function to start server
-startApolloServer(typeDefs, resolvers);
+startApolloServer(typeDefs, resolvers)

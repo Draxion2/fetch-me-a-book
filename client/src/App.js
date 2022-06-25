@@ -4,8 +4,8 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
+  createHttpLink
+} from '@apollo/client'
 import { setContext } from '@apollo/client/link/context';
 
 import SearchBooks from './pages/SearchBooks';
