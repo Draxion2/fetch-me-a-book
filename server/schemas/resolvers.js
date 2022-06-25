@@ -58,7 +58,7 @@ const resolvers = {
 
                 return updatedUser;
             }
-
+            
             throw new AuthenticationError('You must be logged in');
         },
 

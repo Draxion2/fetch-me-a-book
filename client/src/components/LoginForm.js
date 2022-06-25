@@ -8,7 +8,7 @@ import Auth from '../utils/auth';
 
 const LoginForm = () => {
 
-  const [login] = useMutation(LOGIN_USER);
+  const [loginUser] = useMutation(LOGIN_USER);
 
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
@@ -30,7 +30,7 @@ const LoginForm = () => {
     }
 
     try {
-      const { data } = await login({
+      const { data } = await loginUser({
         variables: {...userFormData}
       });
       Auth.login(data.login.token)
