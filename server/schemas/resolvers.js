@@ -16,7 +16,7 @@ const resolvers = {
                 .populate('savedBooks');
 
                 return userData;
-            };
+            }
 
             throw new AuthenticationError('Not logged in');
         }
@@ -47,19 +47,20 @@ const resolvers = {
         },
 
         saveBook: async (parent, { input }, context) => {
+            console.log(input)
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { savedBooks: input } },
-                    { new: true } 
-                )
-                .select('-__v -password')
-                .populate('savedBooks');
-
+                    { new: true })
+                    .select('-__v -password')
+                    .populate('savedBooks');
+    
                 return updatedUser;
             }
+
+            throw new AuthenticationError('You must be logged in')
             
-            throw new AuthenticationError('You must be logged in');
         },
 
         removeBook: async (parent, args, context) => {
